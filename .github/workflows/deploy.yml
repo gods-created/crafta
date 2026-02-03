@@ -19,7 +19,7 @@ jobs:
         
       - name: Install dependencies
         run: |
-          python -m pip --no-cache-dir --upgrade -r requirements.txt
+          python -m pip install --no-cache-dir --upgrade -r requirements.txt
 
       - name: Executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3

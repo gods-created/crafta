@@ -1,0 +1,9 @@
+streamlit
+loguru
+python-dotenv
+openai
+boto3
+botocore
+pillow
+
+# python -m pip install --no-cache-dir --upgrade -r requirements.txt

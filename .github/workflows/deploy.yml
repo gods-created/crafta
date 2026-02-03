@@ -1,0 +1,32 @@
+name: Deploy Crafta
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.14'
+        
+      - name: Install dependencies
+        run: |
+          python -m pip --no-cache-dir --upgrade -r requirements.txt
+
+      - name: Executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            sudo docker service update --image ${{ secrets.IMAGE_NAME }} ${{ SERVICE_NAME }}
